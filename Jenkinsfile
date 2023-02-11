@@ -10,10 +10,10 @@ pipeline {
             steps {
                 script {
                     sh """
-                    echo "----------Build started-------------" 
+                    echo "#-----------------Build STARTED-----------------#" 
                     sleep 10
                     ls -la
-                    echo "----------Build finished-------------" 
+                    echo "#-----------------Build FINISHED----------------#" 
                     """
                 }
             }
@@ -41,8 +41,12 @@ pipeline {
             steps {
                 script {
                     sh """
+                    echo "#-----------------Deploy STARTED-----------------#" 
+                    sleep 2
                     zip  $UNIQUE_IDENTIFIER-build-artifacts.zip index.html
                     aws s3 cp $UNIQUE_IDENTIFIER-build-artifacts.zip s3://${ARTIFACT}
+                    sleep 2
+                    echo "#-----------------Deploy FINISHED----------------#" 
                     """
                 }
             }
