@@ -21,7 +21,7 @@ pipeline {
         stage("Test") {
             steps {
                 script {
-                    sh script: "bash ${WORKSPACE}/scripts/scripts/unit_test.sh", returnStatus: true
+                    sh script: "bash ${WORKSPACE}/scripts/unit_test.sh", returnStatus: true
                 }
             }
         }
