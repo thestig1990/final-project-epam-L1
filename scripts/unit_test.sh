@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ARTIFACT="../index.html"
+ARTIFACT="index.html"
 
 echo "#-------------------Test STARTED-------------------#"
 sleep 5
