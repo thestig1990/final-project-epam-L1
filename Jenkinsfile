@@ -12,6 +12,7 @@ pipeline {
                     sh """
                     echo "----------Build started-------------" 
                     sleep 10
+                    ls -la
                     echo "----------Build finished-------------" 
                     """
                 }
@@ -20,7 +21,7 @@ pipeline {
         stage("Test") {
             steps {
                 script {
-                    sh script: "unit_test.sh", returnStatus: true
+                    sh script: "bash ${WORKSPACE}/scripts/scripts/unit_test.sh", returnStatus: true
                 }
             }
         }
