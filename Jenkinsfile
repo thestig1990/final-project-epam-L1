@@ -3,7 +3,7 @@ pipeline {
         label "aws"
     }
     tools {
-        terraform "terraform"
+        terraform "Terraform"
     }
     stages {
         stage("Build") {
