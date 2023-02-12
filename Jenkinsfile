@@ -58,11 +58,16 @@ pipeline {
             }
             steps {
                 script {
-                    sh "echo Artifact - ${ARTIFACT_NAME}"
+                    sh """
+                    echo "#-----------------Checking deployment-----------------#"
+                    echo Artifact - ${ARTIFACT_NAME}
+                    """
                 }
                 script {
                     if (env.ARTIFACT_NAME == env.S3_OBJECT) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#'"
+                        currentBuild.result = 'SUCCESS'
+                        return
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#'"
                         error("Deployment to the AWS S3 bucket was failed")
