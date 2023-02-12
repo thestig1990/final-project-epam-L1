@@ -60,7 +60,7 @@ pipeline {
                 ).trim()
                 NAME = sh (returnStdout: true, script:
                 """
-                echo "$UNIQUE_IDENTIFIER-build-artifacts.zip"
+                echo "$UNIQUE_IDENTIFIER-build-artifacts.zi"
                 """
                 ).trim()
             }
