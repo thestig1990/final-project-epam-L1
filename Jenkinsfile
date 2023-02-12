@@ -53,17 +53,23 @@ pipeline {
         }
         stage("Checking deployment") {
             environment {
+                ARTIFACT = sh (returnStdout: true, script:
+                """
+                aws s3 ls s3://thestig-artifact-bucket | cut -d" " -f10
+                """
+                ).trim()
                 NAME = sh (returnStdout: true, script:
-                    """
-                    aws s3 ls s3://thestig-artifact-bucket | cut -d" " -f10
-                    """).trim()
+                """
+                echo "$UNIQUE_IDENTIFIER-build-artifacts.zip"
+                """
+                ).trim()
             }
             steps {
                 script {
                     sh "echo Artifact - ${NAME}"
                 }
                 script {
-                    if (params.UNIQUE_IDENTIFIER-build-artifacts.zip == env.NAME) {
+                    if (env.NAME == env. ARTIFACT) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#' "
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#' "
