@@ -60,7 +60,7 @@ pipeline {
             }
             steps {
                 script {
-                    if ('${params.UNIQUE_IDENTIFIER}-build-artifacts.zip' == ${NAME}) {
+                    if (${params.UNIQUE_IDENTIFIER}-build-artifacts.zip == ${NAME}) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#' "
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#' "
