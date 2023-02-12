@@ -36,6 +36,7 @@ pipeline {
                 aws s3api list-buckets --query 'Buckets[].Name' | grep -wo "\\w*thestig-tfstate\\w*" | cut -d" " -f2
                 """
                 ).trim()
+            }
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -74,6 +75,7 @@ pipeline {
                 aws s3api list-buckets --query 'Buckets[].Name' | grep -wo "\\w*thestig-artifact\\w*" | cut -d" " -f2
                 """
                 ).trim()
+            }
             when {
                 not {
                     equals expected: true, actual: params.destroy
@@ -93,6 +95,14 @@ pipeline {
                 sh "terraform destroy --auto-approve"
             }
         }
+        stage("Show Domain") {
+            steps {
+                script {
+                    sh script: "bash ${WORKSPACE}/scripts/display-elb-dns.sh ${UNIQUE_IDENTIFIER}", returnStatus: true
+                }
+            }
+        }
+        
     }
     
 
