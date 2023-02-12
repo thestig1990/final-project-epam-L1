@@ -88,7 +88,7 @@ resource "aws_autoscaling_group" "web" {
 }
 
 resource "aws_elb" "web" {
-  name               = "webserver"
+  name               = "${var.UNIQUE_IDENTIFIER}-webserver"
   subnets            = tolist(var.public_subnet)
   # availability_zones = tolist(var.public_subnet)
   # availability_zones = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
