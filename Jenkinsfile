@@ -95,6 +95,7 @@ pipeline {
                 sh "terraform destroy --auto-approve"
             }
         }
+
         stage("Show Domain") {
             steps {
                 script {
@@ -102,7 +103,6 @@ pipeline {
                 }
             }
         }
-        
     }
     
 
