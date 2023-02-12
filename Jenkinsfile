@@ -63,7 +63,7 @@ pipeline {
                     sh "echo Artifact - ${NAME}"
                 }
                 script {
-                    if ('fp-mysite-build-artifacts.zip' == env.NAME) {
+                    if (params.UNIQUE_IDENTIFIER-build-artifacts.zip == env.NAME) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#' "
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#' "
