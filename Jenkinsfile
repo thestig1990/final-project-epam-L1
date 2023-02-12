@@ -55,7 +55,7 @@ pipeline {
             environment {
                 NAME = sh (returnStdout: true, script:
                     """
-                    aws s3 ls s3://thestig-artifact-bucket | cut -d" " -f10'
+                    aws s3 ls s3://thestig-artifact-bucket | cut -d" " -f10
                     """).trim()
             }
             steps {
