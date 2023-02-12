@@ -10,6 +10,6 @@ module "compute" {
   source             = "./compute"
   web_sg             = module.networking.web_sg
   public_subnet      = module.networking.public_subnet
-  UNIQUE_IDENTIFIER = var.UNIQUE_IDENTIFIER
+  UNIQUE_IDENTIFIER  = var.UNIQUE_IDENTIFIER
   ARTIFACT           = var.ARTIFACT
 }

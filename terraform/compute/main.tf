@@ -31,7 +31,7 @@ data "aws_ami" "ubuntu_22_04" {
 */
 
 data "template_file" "init" {
-  template = file("scripts/deploy_mysite.sh.tpl")
+  template = filebase64("scripts/deploy_mysite.sh.tpl")
 
   vars = {
     UNIQUE_IDENTIFIER = var.UNIQUE_IDENTIFIER
