@@ -66,7 +66,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh "echo Artifact - ${NAME}"
+                    sh "echo Artifact - ${ARTIFACT_NAME}"
                 }
                 script {
                     if (env.ARTIFACT_NAME == env.S3_OBJECT) {
