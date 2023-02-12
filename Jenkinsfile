@@ -53,12 +53,12 @@ pipeline {
         }
         stage("Checking deployment") {
             environment {
-                ARTIFACT = sh (returnStdout: true, script:
+                S3_OBJECT = sh (returnStdout: true, script:
                 """
                 aws s3 ls s3://thestig-artifact-bucket | cut -d" " -f10
                 """
                 ).trim()
-                NAME = sh (returnStdout: true, script:
+                ARTIFACT_NAME = sh (returnStdout: true, script:
                 """
                 echo "$UNIQUE_IDENTIFIER-build-artifacts.zip"
                 """
@@ -69,13 +69,16 @@ pipeline {
                     sh "echo Artifact - ${NAME}"
                 }
                 script {
-                    if (env.NAME == env. ARTIFACT) {
+                    if (env.ARTIFACT_NAME == env.S3_OBJECT) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#'"
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#'"
                         error("Deployment to the AWS S3 bucket was failed")
                     }
-                    sh "aws s3api list-objects --bucket thestig-artifact-bucket"
+                    sh """
+                    echo "List of the objects in S3 bucket"
+                    aws s3api list-objects --bucket thestig-artifact-bucket
+                    """
                 }
             }
         }
