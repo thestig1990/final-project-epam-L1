@@ -60,6 +60,9 @@ pipeline {
             }
             steps {
                 script {
+                    sh "echo ${NAME}"
+                }
+                script {
                     if ('fp-mysite-build-artifacts.zip' == ${NAME}) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#' "
                     } else {
