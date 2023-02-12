@@ -55,7 +55,7 @@ pipeline {
             environment {
                 NAME = sh (returnStdout: true, script:
                     """
-                    aws s3 ls s3://thestig-artifact-bucket | awk '{print $4}'
+                    aws s3 ls s3://thestig-artifact-bucket | awk '{print \$4}'
                     """).trim()
             }
             steps {
