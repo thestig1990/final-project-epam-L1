@@ -2,8 +2,8 @@
 
 terraform {
   backend "s3" {
-    // bucket = "thestig.deploy-aws-resourses"
-    // key    = "remote.tfstate"
+    // bucket = "thestig-tfsate-bucket"
+    // key    = "fp-mysite.tfstate"
     encrypt = true
     region = "eu-central-1"
   }
