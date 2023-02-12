@@ -2,9 +2,6 @@ pipeline {
     agent {
         label "aws"
     }
-    tools {
-        terraform "Terraform"
-    }
     stages {
         stage("Build") {
             steps {
@@ -30,11 +27,6 @@ pipeline {
                 ARTIFACT = sh (returnStdout: true, script: 
                 """
                 aws s3api list-buckets --query 'Buckets[].Name' | grep -wo "\\w*thestig-artifact-\\w*" | cut -d" " -f2
-                """
-                ).trim()
-                TFSTATE = sh (returnStdout: true, script: 
-                """
-                aws s3api list-buckets --query 'Buckets[].Name' | grep -wo "\\w*thestig-tfstate-\\w*" | cut -d" " -f2
                 """
                 ).trim()
             }
@@ -76,7 +68,7 @@ pipeline {
                         error("Deployment to the AWS S3 bucket was failed")
                     }
                     sh """
-                    echo "List of the objects in S3 bucket"
+                    echo "List of the objects in S3 bucket:"
                     aws s3api list-objects --bucket thestig-artifact-bucket
                     """
                 }
@@ -84,3 +76,4 @@ pipeline {
         }
     }
 }
+
