@@ -65,17 +65,17 @@ pipeline {
                 }
                 script {
                     if (env.ARTIFACT_NAME == env.S3_OBJECT) {
-                        sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#'"
+                        sh """
+                        echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#'
+                        echo "List of the objects in S3 bucket:"
+                        aws s3api list-objects --bucket thestig-artifact-bucket
+                        """
                         currentBuild.result = 'SUCCESS'
                         return
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#'"
                         error("Deployment to the AWS S3 bucket was failed")
                     }
-                    sh """
-                    echo "List of the objects in S3 bucket:"
-                    aws s3api list-objects --bucket thestig-artifact-bucket
-                    """
                 }
             }
         }
