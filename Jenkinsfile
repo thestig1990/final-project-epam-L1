@@ -52,15 +52,20 @@ pipeline {
             }
         }
         stage("Checking deployment") {
+            environment {
+                NAME = sh (returnStdout: true, script:
+                    """
+                    aws s3 ls s3://thestig-artifact-bucket | awk '{print $4}'
+                    """).trim()
+            }
             steps {
                 script {
-                    sh "NAME=`bash aws s3 ls s3://thestig-artifact-bucket | awk '{print ${4}}'`"
-                    if (${UNIQUE_IDENTIFIER}-build-artifacts.zip == $NAME) {
+                    if ($UNIQUE_IDENTIFIER-build-artifacts.zip == ${NAME}) {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was successful-----------------#' "
                     } else {
                         sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#' "
                     }
-                    sh script: "bash aws s3api list-objects --bucket thestig-artifact-bucket", returnStatus: true
+                    sh "aws s3api list-objects --bucket thestig-artifact-bucket"
                 }
             }
         }
