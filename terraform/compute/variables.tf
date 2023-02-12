@@ -10,3 +10,6 @@ variable "web_instance_type" {
   default = "t2.micro"
 }
 
+variable "UNIQUE_IDENTIFIER" {}
+
+variable "ARTIFACT" {}

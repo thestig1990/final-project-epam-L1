@@ -30,12 +30,21 @@ data "aws_ami" "ubuntu_22_04" {
 }
 */
 
+data "template_file" "init" {
+  template = file("scripts/deploy_mysite.sh.tpl")
+
+  vars = {
+    UNIQUE_IDENTIFIER = var.UNIQUE_IDENTIFIER
+    ARTIFACT = var.ARTIFACT
+  }
+}
+
 resource "aws_launch_template" "web" {
   name_prefix            = "web"
   image_id               = data.aws_ami.amazon_linux.id
   instance_type          = var.web_instance_type
   vpc_security_group_ids = [var.web_sg]
-  user_data              = filebase64("install_apache.sh")
+  user_data              = data.template_file.init.rendered
 
   lifecycle {
     create_before_destroy = true

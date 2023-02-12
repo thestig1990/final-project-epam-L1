@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 WEBSITE=index.html
 
 # Install Apache HTTP Server 

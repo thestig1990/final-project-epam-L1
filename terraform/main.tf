@@ -7,7 +7,9 @@ module "networking" {
 }
 
 module "compute" {
-  source        = "./compute"
-  web_sg        = module.networking.web_sg
-  public_subnet = module.networking.public_subnet
+  source             = "./compute"
+  web_sg             = module.networking.web_sg
+  public_subnet      = module.networking.public_subnet
+  UNIQUE__IDENTIFIER = var.UNIQUE_IDENTIFIER
+  ARTIFACT           = var.ARTIFACT
 }
