@@ -3,8 +3,8 @@
 set -x
 
 WEBSITE="index.html"
-#ARTIFACT="thestig-artifact-bucket"
-#UNIQUE_IDENTIFIER="fp-mysite"
+ARTIFACT="thestig-artifact-bucket"
+UNIQUE_IDENTIFIER="fp-mysite"
 
 # Install Apache HTTP Server 
 yum update -y
