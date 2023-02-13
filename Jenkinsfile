@@ -43,12 +43,10 @@ pipeline {
                 }
             }
             steps {
-                sh """
-                cd terraform
-                sh terraform init -no-color -backend-config="key=${UNIQUE_IDENTIFIER}.tfstate" -backend-config="bucket=${TFSTATE}-bucket"
-                sh terraform plan -input=false -out tfplan
-                sh terraform show -no-color tfplan > tfplan.txt
-                """
+                sh 'cd terraform'
+                sh 'terraform init -no-color -backend-config="key=${UNIQUE_IDENTIFIER}.tfstate" -backend-config="bucket=${TFSTATE}-bucket"'
+                sh 'terraform plan -input=false -out tfplan'
+                sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
 
