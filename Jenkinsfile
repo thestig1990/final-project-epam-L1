@@ -64,7 +64,7 @@ pipeline {
             }
             steps {
                 script {
-                    def plan = readFile 'tfplan.txt'
+                    def plan = readFile 'terraform/tfplan.txt'
                     input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
@@ -85,7 +85,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'terraform apply -input=false -var ARTIFACT=${ARTIFACT} tfplan'
+                sh 'terraform apply -input=false -var ARTIFACT=${ARTIFACT}-bucket tfplan'
             }
         }
 
