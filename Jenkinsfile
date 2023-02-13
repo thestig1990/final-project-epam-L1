@@ -44,6 +44,7 @@ pipeline {
             }
             steps {
                 sh 'cd terraform'
+                sh 'pwd'
                 sh 'terraform init -no-color -backend-config="key=fpremote.tfstate" -backend-config="bucket=${TFSTATE}-bucket"'
                 sh 'terraform plan -input=false -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
