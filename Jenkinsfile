@@ -110,7 +110,10 @@ pipeline {
                 equals expected: true, actual: params.destroy
             }
             steps {
-                sh "terraform destroy --auto-approve"
+                sh """
+                cd terraform
+                terraform destroy --auto-approve
+                """
             }
         }
 
