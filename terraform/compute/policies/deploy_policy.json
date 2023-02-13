@@ -1,0 +1,23 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "Stmt1676299014337",
+        "Action": [
+          "s3:GetObject",
+          "s3:ListBucket",
+          "s3:PutObject"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::thestig-artifact-*"
+      },
+      {
+        "Sid": "Stmt1676299546166",
+        "Action": [
+          "iam:AttachRolePolicy"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ]
+  }
