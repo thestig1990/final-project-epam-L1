@@ -85,25 +85,30 @@ pipeline {
                 sh "terraform apply -input=false -var ARTIFACT=${ARTIFACT} tfplan"
             }
         }
-        
-        stage('Destroy') {
-            when {
-                equals expected: true, actual: params.destroy
-            }
-        
-            steps {
-                sh "terraform destroy --auto-approve"
-            }
-        }
 
         stage("Show Domain") {
+            when {
+                not {
+                    equals expected: true, actual: params.destroy
+                }
+            }
             steps {
                 script {
                     sh script: "bash ${WORKSPACE}/scripts/display-elb-dns.sh ${UNIQUE_IDENTIFIER}", returnStatus: true
                 }
             }
         }
+
+        stage('Destroy') {
+            when {
+                equals expected: true, actual: params.destroy
+            }
+            steps {
+                sh "terraform destroy --auto-approve"
+            }
+        }
+
     }
-    
+
 
 }
