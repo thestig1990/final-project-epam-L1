@@ -18,7 +18,7 @@ pipeline {
     }
 
     stages {
-        stage('checkout') {
+        /*stage('checkout') {
             steps {
                  script{
                         dir("terraform")
@@ -27,7 +27,7 @@ pipeline {
                         }
                     }
                 }
-            }
+            } */
 
         stage('Plan') {
             environment {
