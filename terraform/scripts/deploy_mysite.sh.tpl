@@ -16,6 +16,7 @@ aws configure set default.region eu-central-1
 
 # Copy and unzip build artifact from s3
 sudo echo ${ARTIFACT}
+sudo echo ${UNIQUE_IDENTIFIER}
 sudo aws s3 cp s3://"${ARTIFACT}"/"${UNIQUE_IDENTIFIER}"-build-artifacts.zip ./
 sudo unzip "${UNIQUE_IDENTIFIER}"-build-artifacts.zip
 
