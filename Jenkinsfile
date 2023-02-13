@@ -23,7 +23,7 @@ pipeline {
                  script{
                         dir("terraform")
                         {
-                            git "https://github.com/thestig1990/deploy-aws-resources.git"
+                            git "https://github.com/thestig1990/final-project-epam-L1.git"
                         }
                     }
                 }
