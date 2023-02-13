@@ -85,7 +85,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'terraform apply -input=false -var ARTIFACT=${ARTIFACT}-bucket tfplan'
+                sh '''
+                cd terraform
+                terraform apply -input=false -var ARTIFACT=${ARTIFACT}-bucket tfplan
+                '''
             }
         }
 
