@@ -7,7 +7,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'QNIQUE_IDENTIFIER', defaultValue: 'fp-mysite', description: 'My unique identifier for the final project')
+        string(name: 'UNIQUE_IDENTIFIER', defaultValue: 'fp-mysite', description: 'My unique identifier for the final project')
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
     }
