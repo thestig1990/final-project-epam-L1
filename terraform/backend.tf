@@ -3,7 +3,7 @@
 terraform {
   backend "s3" {
     // bucket = "thestig-tfsate-bucket"
-    // key    = "fp-mysite.tfstate"
+    // key    = "fpremote.tfstate"
     encrypt = true
     region = "eu-central-1"
   }
