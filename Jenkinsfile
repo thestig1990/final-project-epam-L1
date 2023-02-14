@@ -124,6 +124,8 @@ pipeline {
                 if (params.destroy == true) {
                     deleteDir()
                     echo "Workspace directory was deleted"
+                } else {
+                    echo "Workspace directory has not been deleted"
                 }
             } 
         }
