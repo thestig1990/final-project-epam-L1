@@ -80,5 +80,11 @@ pipeline {
             }
         }
     }
-}
 
+    post {
+        cleanup {
+            deleteDir()
+            echo "Workspace directory was deleted"
+        } 
+    }
+}
