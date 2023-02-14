@@ -120,11 +120,12 @@ pipeline {
 
     post {
         cleanup {
-            when {
-                equals expected: true, actual: params.destroy
-            }
-            deleteDir()
-        // One or more steps need to be included within each condition's block.
+            script {
+                if (params.destroy == true) {
+                    deleteDir()
+                    echo "Workspace directory was deleted"
+                }
+            } 
         }
     }
 }
