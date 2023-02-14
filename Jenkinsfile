@@ -73,8 +73,8 @@ pipeline {
                         currentBuild.result = 'SUCCESS'
                         return
                     } else {
-                        sh "echo '#-----------------Deployment to the AWS S3 bucket was failed-----------------#'"
-                        error("Deployment to the AWS S3 bucket was failed")
+                        sh "echo '#-----------------Deployment to the AWS S3 bucket failed-----------------#'"
+                        error("Deployment to the AWS S3 bucket failed")
                     }
                 }
             }
