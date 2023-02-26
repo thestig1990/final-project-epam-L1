@@ -45,7 +45,9 @@ resource "aws_launch_template" "web" {
   instance_type          = var.web_instance_type
   vpc_security_group_ids = [var.web_sg]
   user_data              = data.template_file.init.rendered
-
+  
+  # The IAM Instance Profile to launch the instance with
+  # Attaching IAM Role and its associated permissions to the instance
   iam_instance_profile {
     name = aws_iam_instance_profile.deploy_profile.name
   }
