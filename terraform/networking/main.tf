@@ -5,6 +5,7 @@ resource "random_integer" "random" {
   max = 1000
 }
 
+# Сreating a VPC resource
 resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -15,6 +16,7 @@ resource "aws_vpc" "vpc" {
   }
 }
 
+# Сreating a VPC subnet resource
 resource "aws_subnet" "public_subnet" {
   count                   = length(var.public_cidrs)
   vpc_id                  = aws_vpc.vpc.id
@@ -27,12 +29,14 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
+# Provides a resource to create an association between a route table and a subnet
 resource "aws_route_table_association" "public_assoc" {
   count          = length(var.public_cidrs)
   subnet_id      = aws_subnet.public_subnet.*.id[count.index]
   route_table_id = aws_route_table.public_rt.id
 }
 
+# Сreating a VPC Internet Gateway.
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
 
@@ -44,6 +48,7 @@ resource "aws_internet_gateway" "internet_gateway" {
   }
 }
 
+# Creating a VPC routing table.
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.vpc.id
 
@@ -52,12 +57,14 @@ resource "aws_route_table" "public_rt" {
   }
 }
 
+# Creating a routing table entry (a route) in a VPC routing table.
 resource "aws_route" "default_public_route" {
   route_table_id         = aws_route_table.public_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.internet_gateway.id
 }
 
+# Creating a security group resource
 resource "aws_security_group" "web_sg" {
   name        = "web_sg"
   description = "Allow all inbound HTTP traffic"
