@@ -36,7 +36,8 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-# Сreating a VPC Internet Gateway.
+# Сreating a VPC Internet Gateway
+# Internet Gateway allows instances with public IPs to access the internet.
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
 
